@@ -16,9 +16,11 @@ using DongThucVatQuangTri.Models;
 using DongThucVatQuangTri.Models.EF;
 using DongThucVatQuangTri.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 
 namespace DongThucVatQuangTri.Controllers
@@ -63,6 +65,15 @@ namespace DongThucVatQuangTri.Controllers
             // Trả về giá trị session dưới dạng phản hồi
             return Ok(myValue);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAppSetting()
+        {
+            var data =await _context.appsetting.FirstOrDefaultAsync();
+            // Trả về giá trị session dưới dạng phản hồi
+            return Ok(data);
+        }
+
         public async Task<IActionResult> Index()
         {
             var typeNationPark = HttpContext.Session.GetString("NationPark");

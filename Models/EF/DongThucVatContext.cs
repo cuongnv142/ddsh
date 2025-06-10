@@ -34,6 +34,7 @@ namespace DongThucVatQuangTri.Models.EF
         public DbSet<AppRoles> appRoles { get; set; }
         public DbSet<Role> Role { get; set; }
         public DbSet<introduce> introduce { get; set; }
+        public DbSet<AppSettings> appsetting { get; set; }
         public virtual DbSet<Tour> tour { get; set; }
         public virtual DbSet<Map> map { get; set; }
         public virtual DbSet<Banner> Banner { get; set; }
@@ -47,8 +48,6 @@ namespace DongThucVatQuangTri.Models.EF
 
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<NewsCat> NewsCat { get; set; }
-        public virtual DbSet<SiteContact> SiteContact { get; set; }
-       
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -536,89 +535,6 @@ namespace DongThucVatQuangTri.Models.EF
 
 
 
-            modelBuilder.Entity<SiteContact>(entity =>
-            {
-                entity.ToTable("site_contact", "dongthucvat");
-
-                entity.HasIndex(e => e.Language, "site_contact$language_unique")
-                    .IsUnique();
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Address)
-                    .HasMaxLength(255)
-                    .HasColumnName("address");
-
-                entity.Property(e => e.Email)
-                    .HasMaxLength(255)
-                    .HasColumnName("email");
-
-                entity.Property(e => e.EmbedScriptBodyBegin).HasColumnName("embed_script_body_begin");
-
-                entity.Property(e => e.EmbedScriptBodyEnd).HasColumnName("embed_script_body_end");
-
-                entity.Property(e => e.EmbedScriptHead).HasColumnName("embed_script_head");
-
-                entity.Property(e => e.Fax)
-                    .HasMaxLength(255)
-                    .HasColumnName("fax");
-
-                entity.Property(e => e.Hotline)
-                    .HasMaxLength(255)
-                    .HasColumnName("hotline");
-
-                entity.Property(e => e.Language)
-                    .HasMaxLength(50)
-                    .HasColumnName("language");
-
-                entity.Property(e => e.LinkFace)
-                    .HasMaxLength(255)
-                    .HasColumnName("link_face");
-
-                entity.Property(e => e.LinkFavicon)
-                    .HasMaxLength(255)
-                    .HasColumnName("link_favicon");
-
-                entity.Property(e => e.LinkInsta)
-                    .HasMaxLength(255)
-                    .HasColumnName("link_insta");
-
-                entity.Property(e => e.LinkLogo)
-                    .HasMaxLength(255)
-                    .HasColumnName("link_logo");
-
-                entity.Property(e => e.LinkLogoFooter)
-                    .HasMaxLength(255)
-                    .HasColumnName("link_logo_footer");
-
-                entity.Property(e => e.LinkMap).HasColumnName("link_map");
-
-                entity.Property(e => e.LinkMessenger)
-                    .HasMaxLength(255)
-                    .HasColumnName("link_messenger");
-
-                entity.Property(e => e.LinkTwitter)
-                    .HasMaxLength(255)
-                    .HasColumnName("link_twitter");
-
-                entity.Property(e => e.LinkYoutube)
-                    .HasMaxLength(255)
-                    .HasColumnName("link_youtube");
-
-                entity.Property(e => e.LinkZalo)
-                    .HasMaxLength(255)
-                    .HasColumnName("link_zalo");
-
-                entity.Property(e => e.Multitext).HasColumnName("multitext");
-
-                entity.Property(e => e.Name)
-                    .HasMaxLength(255)
-                    .HasColumnName("name");
-
-                entity.Property(e => e.Phone)
-                    .HasMaxLength(255)
-                    .HasColumnName("phone");
-            });
             OnModelCreatingPartial(modelBuilder);
         }
 

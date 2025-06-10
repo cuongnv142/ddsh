@@ -82,7 +82,7 @@
                         <div class="logo">
                             <a asp-action="Index" asp-controller="Home"><img src="/images/logo.png" width="70" height="70" alt=""></a>
                         </div>
-                        <div class="lang custom-select1" style="width:630px !important; overflow:hidden;height:auto;">
+                        <div class="lang custom-select1 app-name" style="width:630px !important; overflow:hidden;height:auto;">
                             PHẦN MỀM CƠ SỞ DỮ LIỆU VỀ CÁC HỆ SINH THÁI CÓ ĐA DẠNG SINH HỌC CAO TRONG PHẠM VI RỪNG PHÒNG HỘ
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                         <li>
                             <i class="icon phone"></i>
                             <span>
-                                Hotline<span>
+                                Hotline<span class="app-hotline">
                                     0243.8438792
                                 </span>
                             </span>
@@ -101,7 +101,7 @@
                         </li> *@
                         <li>
                             <i class="icon map"></i>
-                            <span>Địa chỉ<span>Cục Lâm nghiệp - Bộ NN và PTNT, số 2 Ngọc Hà, Ba Đình, Hà Nội.</span></span>
+                            <span>Địa chỉ<span class="app-address">Cục Lâm nghiệp - Bộ NN và PTNT, số 2 Ngọc Hà, Ba Đình, Hà Nội.</span></span>
                         </li>
                     </ul>
                 </div><!--end contact-->
@@ -146,10 +146,10 @@
                         <li><a asp-action="Contact" asp-controller="Home">Liên hệ</a></li>
                     </ul>
                     <ul style="color:white;width:70% !important;line-height: 40px;">
-                        <li>PHẦN MỀM CƠ SỞ DỮ LIỆU VỀ CÁC HỆ SINH THÁI CÓ ĐA DẠNG SINH HỌC CAO TRONG PHẠM VI RỪNG PHÒNG HỘ</li>
-                        <li>Địa chỉ: Cục Lâm nghiệp-Bộ NN và PTNT, số 2 Ngọc Hà, Ba Đình, Hà Nội.</li>
-                        <li>Hotline: 0243.8438792</li>
-                        <li>Email: tonghop@vnforest.gov.vn</li>
+                        <li class="app-name">PHẦN MỀM CƠ SỞ DỮ LIỆU VỀ CÁC HỆ SINH THÁI CÓ ĐA DẠNG SINH HỌC CAO TRONG PHẠM VI RỪNG PHÒNG HỘ</li>
+                        <li>Địa chỉ: <span class="app-address">Cục Lâm nghiệp-Bộ NN và PTNT, số 2 Ngọc Hà, Ba Đình, Hà Nội.</span></li>
+                        <li>Hotline: <span class="app-hotline">0243.8438792</span></li>
+                        <li>Email: <span class="app-email">tonghop@vnforest.gov.vn</span> </li>
                     </ul>
                 </div><!--end sublink-->
                 <div style="clear:both;"></div>
@@ -191,7 +191,25 @@
             </div>
         </div>
     </div>
-
+    <script>
+            $.ajax({
+            url: '/Home/GetAppSetting', // Đường dẫn đến action xử lý yêu cầu ở phía server
+            method: 'GET',
+            success: function (result) {
+                if (result) {
+                    $(document).ready(function () {
+                        $('.app-address').text(result.address);
+                        $('.app-name').text(result.name);
+                        $('.app-email').text(result.email);
+                        $('.app-hotline').text(result.hotLine);
+                    });
+                }
+            },
+            error: function () {
+                console.error('Lỗi khi lấy giá trị từ session.');
+            }
+        });
+    </script>
     <script>
         $.ajax({
             url: '/Home/GetSessionValue', // Đường dẫn đến action xử lý yêu cầu ở phía server
